@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style type="text/css">
+
+        a {
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        #box0 {
+            height: 304px;
+            border: solid 2px black;
+        }
+
+        .box1 {
+            width: 13%;
+            height: 300px;
+            background: burlywood;
+            border: solid 2px black;
+        }
+
+        .box2 {
+            width: 85%;
+            height: 300px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border: solid 2px black;
+        }
+        .beijin1{
+          background: burlywood;
+        }
+        .box2 img{
+            width: 100%;
+            height: 300px;
+
+        }
+    </style>
+</head>
+<body background="/static/beijing/create_book.jpg"
+      style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
+
+
+<div id="box0">
+    {% if  data_cookies.name == 0 %}
+        <p><a href="{% url 'login' %}">登陆</a></p>   <p><a href="{% url 'register' %}">注册</a></p>
+    {% else %}
+        <div align="center" class="box1">
+
+            <p>用户名：{{ name }} </p>
+            {% load static %}
+            <p>用户头像</p> <img src="{{ date_touxiang }}" height=50 width="50"/><br>
+            <p>会员等级：{{ date_vip.vip }}</p>
+            <p>账户余额：{{ date_vip.money }}</p>
+            <button><a href="{% url 'Exit' %}">退出登陆</a></button>
+            <button><a href="{% url 'personal' %}">前往个人中心</a></button>
+            <button><a href="{% url 'all_information' %}">点击完善个人信息</a></button>
+            <button><a href="{% url 'push_money' %}">点击充值</a></button>
+            {% if date_allmassage.root == '1' %}
+                <button><a href="{% url 'roots' %}">root管理</a></button>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="box2">
+        <img src="http://www.phpzero.com/content/uploadfile/tpl_options//hd3.jpg" alt="" >
+{#        <h3>广告位招租</h3>#}
+    </div>
+</div>
+<br>
+<br>
+<div align="center">
+
+    <form action="/app/sousuo/" method="post">
+        {% csrf_token %}
+        <input type="text" value="搜索题目或作者名" name="select">
+        <input type="submit" value="点击搜索">
+
+    </form>
+</div>
+
+<div align="center">
+     <a href="{% url 'clicks_rank'  %}" style="display: block;"> 点击排行榜</a>
+</div>
+
+<div style="height:248px;position: relative;margin: 50px;">
+<div style="border: solid 1px;"  class="beijin1">
+    <h3 >&nbsp;&nbsp;玄幻</h3>
+{#    <span style="position: absolute;top:20px;left:0px;">书籍信息</span>#}
+</div>
+    <a style="position: absolute;top:20px;right:100px;" href="{% url 'booktype' 0 %}"> 点击显示更多</a>
+    {% for i in allbook_massage %}
+        {% if i.book_type == '0' %}
+            <div style="float:left;margin-left:50px;">
+                <img src="{{ i.book_pic }}" height=200 width="150"/>
+                <a href="{% url 'contant' i.book_name %}" style="display: block;"> {{ i.book_name }}</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div style="height:248px;position: relative;margin: 50px;">
+<div style="border: solid 1px;" class="beijin1">
+    <h3 >&nbsp;&nbsp;都市</h3>
+{#    <span style="position: absolute;top:20px;left:0px;">书籍信息</span>#}
+</div>
+    <a style="position: absolute;top:20px;right:100px;" href="{% url 'booktype' 1 %}"> 点击显示更多</a>
+    {% for i in allbook_massage %}
+        {% if i.book_type == '1' %}
+            <div style="float:left;margin-left:50px;">
+                <img src="{{ i.book_pic }}" height=200 width="150"/>
+                <a href="{% url 'contant' i.book_name %}" style="display: block;"> {{ i.book_name }}</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div style="height:248px;position: relative;margin: 50px;">
+<div style="border: solid 1px;" class="beijin1">
+    <h3 >&nbsp;&nbsp;仙侠</h3>
+{#    <span style="position: absolute;top:20px;left:0px;">书籍信息</span>#}
+</div>
+    <a style="position: absolute;top:20px;right:100px;" href="{% url 'booktype' 2 %}"> 点击显示更多</a>
+    {% for i in allbook_massage %}
+        {% if i.book_type == '2' %}
+            <div style="float:left;margin-left:50px;">
+                <img src="{{ i.book_pic }}" height=200 width="150"/>
+                <a href="{% url 'contant' i.book_name %}" style="display: block;"> {{ i.book_name }}</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+</body>
+</html>

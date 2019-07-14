@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+       <style type="text/css">
+          .box2{
+             width: 90%;
+             height: 300px;
+             border:  0px black;
+             position: absolute;
+             left: 25%;
+             top: 0px;
+
+         }
+
+
+         .box1{
+             width: 30%;
+             height: 450px;
+             border:  0px black;
+             position: absolute;
+             left: 45%;
+             top: 450px;
+
+         }
+
+		</style>
+</head>
+<body background="/static/beijing/push2.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;" >
+
+<div class="box2">
+   <img src="/static/beijing/chuanqi.png" height=200 width="1000"/>
+</div>
+
+<div class="box1">
+    <h3 >{{ data }}</h3>
+    <img src="/static/beijing/push1.jpg" height=200 width="250"/>
+ <form action="/app/push_money/" method="post">
+        {% csrf_token %}
+        <p>输入充值金额</p>
+        <input type="number" value="umoney" name="money"><br>
+
+
+     <p>充值500可成为高级vip(能看所有书)</p>
+     <input type="radio" name="vip" value="1" /> 成为vip
+     <input type="radio"  name="vip" value="0" />以后再说<br>
+     <input type="submit">
+     <input type="reset">
+    </form>
+
+<button><a href="{% url 'personal' %}">回到个人中心</a></button><br>
+    <button><a href="{% url 'index' %}">回到主页</a></button>
+    </div>
+</body>
+</html>

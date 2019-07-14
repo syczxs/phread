@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+       #box0{
+            text-align:center;
+       }
+
+         .box1{
+             width: 60%;
+             background: white;
+             border: solid 0px black;
+             text-align:center;
+             background: burlywood;
+
+
+         }
+
+
+		</style>
+</head>
+<body>
+<div id="box0">
+{% if  data_cookies.name == 0 %}
+    <p> <a href="{% url 'login'  %}">登陆</a></p>   <p><a href="{% url 'register'  %}">注册</a></p>
+    {% else %}
+    <div align="center"    >
+
+    <p>用户名：{{name}} </p>
+    {% load static %}
+    <p>用户头像</p> <img src="{{ date_touxiang }}" height=50 width="50"/><br>
+    <p>会员等级：{{ date_vip.vip }}</p>
+    <p>账户余额：{{ date_vip.money }}</p>
+    <button><a href="{% url 'Exit' %}">退出登陆</a></button>
+    <button><a href="{% url 'personal' %}">前往个人中心</a></button>
+</div>
+{% endif %}
+
+{% if massage.title_number  >= 4%}
+    {% if a  == 1%}
+<p>本章是收费章节</p>
+        <div  >
+<h3>第{{ massage.title_number }}章  {{ massage.title_name }}</h3><br>
+{{ massage2  }}
+</div>
+ <form action="/app/buy_title/{{ massage.ID }}/{{ massage.title_number }}/" method="post">
+        {% csrf_token %}
+     <p>是否购买本本章</p>
+     <input type="radio" name="vip_title" value="1" /> 购买
+     <input type="submit">
+    </form>
+        {% else %}
+        <h3>第{{ massage.title_number }}章  {{ massage.title_name }}</h3><br>
+{{ massage.title_content  }}
+{% endif %}
+
+
+{% else %}
+
+<h3>第{{ massage.title_number }}章  {{ massage.title_name }}</h3><br>
+{{ massage.title_content  }}
+
+{% endif %}
+
+<div>
+    {% if massage.title_number > 1%}
+    <a href="{% url 'back_title' massage.ID massage.title_number  %}"> 上一章</a>
+    {% endif %}
+{% if massage.title_number < news%}
+<a href="{% url 'next_title' massage.ID massage.title_number  %}"> 下一章</a>
+{% endif %}
+    </div>
+
+<div>
+    <h3>留言板</h3>
+     <table border="0"  >
+<thead>
+<tr>
+    <th>用户名</th>
+    <th>留言内容</th>
+    <th>留言时间</th>
+</tr>
+        {% for i in liuyanneirong %}
+             <tr>
+        <td>{{ i.username }} </td>
+       <td> {{ i.liuyan}}</td>
+       <td> {{ i.up_time }}</td>
+             </tr>
+    {% endfor %}
+</table>
+</div>
+
+<div>
+    <h3>发表留言</h3>
+      <form action="/app/liuyan/{{ massage.ID }}/{{ massage.title_number }}/" method="post">
+        {% csrf_token %}
+        <p>输入留言内容</p>
+        <input type="text" name="contant"><br>
+        <input type="submit">
+        <input type="reset">
+    </form>
+</div>
+</div>
+</body>
+</html>

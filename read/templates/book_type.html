@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% if  data_cookies.name == 0 %}
+    <p> <a href="{% url 'login'  %}">登陆</a></p>   <p><a href="{% url 'register'  %}">注册</a></p>
+    {% else %}
+    <div align="center"  class="box1"  >
+
+    <p>用户名：{{name}} </p>
+    {% load static %}
+    <p>用户头像</p> <img src="{{ date_touxiang }}" height=50 width="50"/><br>
+    <p>会员等级：{{ date_vip.vip }}</p>
+    <p>账户余额：{{ date_vip.money }}</p>
+    <button><a href="{% url 'Exit' %}">退出登陆</a></button>
+    <button><a href="{% url 'personal' %}">前往个人中心</a></button>
+    <button><a href="{% url 'all_information' %}">点击完善个人信息</a></button>
+        {% if date_allmassage.root == 1 %}
+           <button><a href="{% url 'roots' %}">root管理</a></button>
+    	{% endif %}
+</div>
+{% endif %}
+
+
+ {% for i in allbook_massage %}
+        {% if i.book_type == booktype %}
+        <img src="{{ i.book_pic }}" height=200 width="100"/>
+           <a href="{% url 'contant' i.book_name %}"> {{ i.book_name }}</a>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

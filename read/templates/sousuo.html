@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+ {% for i in massage %}
+        <p>编号{{ i.ID }}</p>
+     <p>小说名{{ i.book_name }}</p>
+     <p>作者{{ i.author }}</p>
+     <p>连载时间{{ i.start_time }}</p>
+     <p>最近更新{{ i.last_time }}</p>
+     <p>简介{{ i.jianjie }}</p>
+        <img src="{{ i.book_pic }}" height=200 width="100"/>
+
+    {% endfor %}
+
+</body>
+</html>

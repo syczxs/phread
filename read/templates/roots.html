@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h3>用户管理</h3>
+     <table border="0"  >
+<thead>
+<tr>
+    <th>用户名</th>
+    <th>pwd</th>
+    <th>emil</th>
+    <th>性别</th>
+    <th>身份</th>
+    <th>管理</th>
+
+
+
+</tr>
+        {% for i in allmassage_user_all %}
+             <tr>
+        <td>{{ i.username }} </td>
+       <td> {{ i.pwd }}</td>
+       <td> {{ i.emil }}</td>
+              <td> {{ i.sex }}</td>
+              <td> {{ i.author }}</td>
+              <td>
+                  {% if i.root == '1' %}
+                      <p>我是管理员你删不掉我</p>
+                      {% else %}
+                  <button><a href="{% url 'delect_user_from' i.username %}">删除</a></button>
+             {% endif %}
+             </td>
+             </tr>
+    {% endfor %}
+</table>
+</div>
+
+<div>
+    <h3>小说管理</h3>
+</div>
+
+
+</body>
+</html>

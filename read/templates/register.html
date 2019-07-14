@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body background="/static/beijing/create_book.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;" >
+
+<div align="center">
+    <hi>欢迎注册胖虎读书</hi>
+    {{ date }}
+    <form action="/app/register/" method="post">
+        {% csrf_token %}
+        <p>请输入用户名</p>
+        <input type="text"  name="name"><br>
+        <P>输入密码</P>
+        <input type="text"  name="password"><br>
+        <P>输入确认密码</P>
+        <input type="text"  name="password2"><br>
+        <P>输入邮箱地址</P>
+        <input type="text"  name="emial"><br>
+
+        <h3>性别:</h3>
+        <input type="radio" name="sex" value="man" /> 男
+        <input type="radio"  name="sex" value="women" />女
+
+        <h3>是否成为作者:</h3>
+        <input type="radio" name="type" value="author" /> 是
+        <input type="radio"  name="type" value="reader" />否<br>
+
+
+        <input type="submit" value="提交">
+        <input type="reset">
+    </form>
+</div>
+
+</body>
+</html>

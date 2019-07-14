@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        a{
+            text-decoration: none;
+        }
+         #box0{
+             width: 50%;
+             height: 2000px;
+              border: solid 0px black;
+             margin:0 auto;
+             background: wheat;
+         }
+
+			.color{
+				color: white;
+			}
+
+         .box1{
+             width: 20%;
+             height: 450px;
+             background: white;
+             border: solid 0px black;
+             text-align:center;
+             background: burlywood;
+
+         }
+         .box2{
+             width: 35%;
+             height: 455px;
+             background: white;
+             position: absolute;
+             right: 25.5%;
+             top:70px;
+             border: solid 0px black;
+             background: burlywood;
+
+
+         }
+         .box3{
+             position: absolute;
+             left: 60%;
+             top: 30px;
+            border: 0px black;
+             font-size:100%;
+             color: white;
+         }
+         .box4{
+             position: absolute;
+             left: 68%;
+             top:30px;
+            border: 0px black;
+             font-size:100%;
+         }
+         .box5{
+             position: absolute;
+             left: 30px;
+             top:30px;
+         }
+
+         img{
+             -webkit-border-radius: 10px;
+             -moz-border-radius: 10px;
+             border-radius: 10px;
+         }
+         .zong{
+             width: 45%;
+             height: 700px;
+             position: absolute;
+             left:27%;
+             border: solid 0px black;
+
+         }
+
+        .xinqu{
+             width: 120px;
+             height: 50px;
+             position: absolute;
+             right: 10%;
+             top:7px;
+             border:  0px black;
+        }
+        .shoucang{
+             position: absolute;
+             left: 60%;
+             top:70px;
+             border:  0px black;
+        }
+
+           .chuangzuo{
+               width: 48%;
+             height: 100px;
+             background: white;
+             position: absolute;
+             left: 26%;
+             top:900px;
+             border: solid 0px black;
+               background: wheat;
+               text-align:center;
+
+         }
+           .liuyan{
+               width: 48%;
+             height: 500px;
+             background: white;
+             position: absolute;
+             left: 26%;
+             top:1000px;
+             border: solid 0px black;
+               background: wheat;
+
+         }
+
+        .Navigation{ background: white;
+            width:100%; height:50px;
+            margin:0 auto;
+            border: solid 0px black;
+            background: wheat;
+        }
+		</style>
+</head>
+<body >
+<div id="box0">
+
+<div class="Navigation">
+    <div class="box5"><img src="/static/beijing/panghu.jpeg" height=150 width="150" border-radius='20px';/></div>
+    <div class="box3"><div class="color"> <a href="{% url 'index' %}">回到主页</a></div></div>
+    <div class="box4"> <a href="{% url 'Exit' %}">退出登陆</a></div>
+</div>
+
+
+
+<div  class="box1" >
+
+      <p>用户头像</p>
+             {% load static %}
+        <img  border='2px' src="{{ all_user_manage.pic }}" height=100  width="100"  title="图片" /><br>
+      <p>用户姓名：{{ all_user_manage.username }}</p>
+      <p>用户密码；{{ all_user_manage.pwd }}</p>
+      <p>用户邮箱；{{ all_user_manage.emil }}</p>
+      <p>用户年龄：{{ all_user_manage.age }}</p>
+      <p>用户性别：{{ all_user_manage.sex }}</p>
+      <p>身份状态：{{ all_user_manage.author }}</p>
+ <button><a href="{% url 'push_money'   %}">点击充值</a></button>
+
+</div>
+
+
+
+
+<div class="box2">
+ <img src="/static/beijing/shu.jpg" height=80 width="120"/>
+<div ><h3>我的书架</h3></div>
+<table border="0"  >
+<thead>
+<tr>
+  <th>浏览小说</th>
+    <th>浏览章节</th>
+    <th>章节名</th>
+    <th>浏览时间</th>
+</tr>
+</thead>
+<tbody>
+ {% for i in user_read_history %}
+     <tr>
+     <td>{{ i.bookname }}</td>
+     <td>{{ i.title_id }}</td>
+     <td>{{ i.title_name }}</td>
+     <td>{{ i.read_time }}</td>
+     </tr>
+    {% endfor %}
+</tbody>
+</table>
+    <div class="xinqu" >
+    <h3>我的兴趣</h3>
+<p>
+    {% for i in hobby %}
+       {% if i == '0' %}
+        <p>玄幻</p>
+        {% elif i == '1' %}
+        <p>都市</p>
+         {% elif i == '2' %}
+        <p>仙侠</p>
+           {% elif i == '3' %}
+        <p>历史</p>
+           {% elif i == '4' %}
+        <p>军事</p>
+            {% elif i == '5' %}
+        <p>游戏</p>
+            {% elif i == '6' %}
+        <p>体育</p>
+            {% elif i == '7' %}
+        <p>言情</p>
+            {% elif i == '9' %}
+        <p>灵异</p>
+        {% endif %}
+    {% endfor %} </p>
+</div>
+</div>
+
+
+<div class="zong">
+<div class="shoucang">
+ <table border="0"  >
+<thead>
+<tr>
+  <th>我的收藏</th>
+   <th>取消收藏</th>
+</tr>
+</thead>
+<tbody>
+ {% for i in love %}
+     <tr>
+     <td><a href="{% url 'contant' i %}">{{ i }}</a></td>
+         {% if i != ' '  %}
+      <td> <button><a href="{% url 'delect_shoucang' i %}">取消收藏</a></button></td>
+     {% endif %}
+     </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+
+
+
+<div >
+    <div>
+    <h3>我的小说</h3>
+<table border="0"  >
+<thead>
+<tr>
+    <th>小说名</th>
+    <th>分面</th>
+    <th>更新</th>
+</tr>
+    {% for i in book_massage %}
+        <tr>
+        <td><a href="{% url 'contant' i.book_name %}"> {{ i.book_name }}</a></td>
+       <td> <img src="{{ i.book_pic }}" height=100 width="70"/><br></td>
+       <td> <button><a href="{% url 'write_book' i.ID i.book_name i.author %}">点击更新</a></button></td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+</div>
+
+
+
+{% if all_user_manage.author == 'author' %}
+<div class="chuangzuo">
+     <h3>点击创作小说</h3>
+    <button><a href="{% url 'create_book' %}">创建小说</a></button>
+</div>
+{% endif %}
+
+
+<div class="liuyan">
+    <h3>站内信息</h3>
+    <div>
+        <h3>发送</h3>
+        <form action="/app/xinxi/" method="post">
+        {% csrf_token %}
+        <p>请输入发送对象</p>
+        <input type="text"  name="name"><br>
+        <P>输入发送内容</P>
+        <input type="text" name="contant"><br>
+        <input type="submit">
+        <input type="reset">
+    </form>
+    </div>
+    <div>
+        <h3>接受</h3>
+        <table border="0"  >
+<thead>
+<tr>
+    <th>发送者</th>
+    <th>接受者</th>
+    <th>内容</th>
+    <th>发送时间</th>
+    <th>浏览状态</th>
+    <th>标记浏览</th>
+</tr>
+        {% for i in send_information %}
+             <tr>
+        <td>{{ i.username }} </td>
+       <td> {{ i.sendname }}</td>
+       <td> {{ i.xinxi }}</td>
+              <td> {{ i.sendtime }}</td>
+              <td> {{ i.states }}</td>
+              <td> <button><a href="{% url 'yidu' i.sendtime %}">标记为已读</a></button> </td>
+             </tr>
+    {% endfor %}
+</table>
+
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>

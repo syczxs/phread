@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+
+		</style>
+</head>
+<body background="/static/beijing/create_book.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;" >
+
+<div align="center">
+<form action="/app/create_book/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>为你的小说起一个名字</h3>
+        <input type="text"  name="name"><br>
+        <h3>选择你的小说类型</h3>
+         <input type="radio" name="type" value="0" /> 玄幻
+         <input type="radio"  name="type" value="1" />都市
+         <input type="radio"  name="type" value="2" />仙侠
+         <input type="radio"  name="type" value="3" />历史
+         <input type="radio"  name="type" value="4" />军事
+         <input type="radio"  name="type" value="5" />游戏
+         <input type="radio"  name="type" value="6" />体育
+         <input type="radio"  name="type" value="7" />言情
+         <input type="radio"  name="type" value="8" />灵异<br>
+
+        <h3>为你的小说增添介绍</h3>
+        <input type="text"  name="jieshao"><br>
+
+         <p>点击上传小说封面</p>
+         <input type="file"  name="pic"><br>
+
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>

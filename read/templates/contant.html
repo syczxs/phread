@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% if  data_cookies.name == 0 %}
+    <p> <a href="{% url 'login'  %}">登陆</a></p>   <p><a href="{% url 'register'  %}">注册</a></p>
+    {% else %}
+    <div align="center"   >
+
+    <p>用户名：{{name}} </p>
+    {% load static %}
+    <p>用户头像</p> <img src="{{ date_touxiang }}" height=50 width="50"/><br>
+    <p>会员等级：{{ date_vip.vip }}</p>
+    <p>账户余额：{{ date_vip.money }}</p>
+    <button><a href="{% url 'Exit' %}">退出登陆</a></button>
+    <button><a href="{% url 'personal' %}">前往个人中心</a></button>
+    <button><a href="{% url 'collection' allbook_massage.book_name  %}">点击搜藏该小说</a></button>
+</div>
+{% endif %}
+
+
+<div>
+    <h3>书籍信息</h3>
+
+
+    <img src="{{ allbook_massage.book_pic }}" height=200 width="100"/><br>
+    {{ allbook_massage.book_name }}<br>
+    <p>简介:{{ allbook_massage.jianjie }}</p>
+    <p>作者:{{ allbook_massage.author }}</p>
+    <p>当前章节:{{ allbook_massage.chapter }}</p>
+    <p>开始连载时间:{{ allbook_massage.start_time }}</p>
+    <p>最新更新:{{ allbook_massage.last_time }}</p>
+    <p>总点击量:{{ sum }}</p>
+</div>
+
+<div>
+    <h3>章节信息</h3>
+{% for i in book_title %}
+    <a href="{% url 'read_story' i.ID i.title_number %}"> 第{{ i.title_number }}章：{{ i.title_name }}</a>
+    {% if i.title_number >= 4 %}
+        <img src="/static/beijing/suo.PNG" height=40 width="30"/> {% endif %}
+{% endfor %}
+</div>
+</body>
+</html>
